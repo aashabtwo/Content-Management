@@ -50,11 +50,11 @@ const Question = mongoose.model('QuestionSchema', questionSchema);
 
 // article schema
 const articleSchema = new mongoose.Schema({
-    title: {
+    author: {
         type: String,
         required: true
     },
-    author: {
+    title: {
         type: String,
         required: true
     },
