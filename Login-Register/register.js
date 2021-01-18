@@ -15,7 +15,7 @@ router.post('/', async (req, res) => {
     }
     else {
         // destructuring request body
-        const{ firstName,lastName,email,password,confirmPassword,department,roll,batch } = result;
+        const{ firstName,lastName,email,password,department,roll,batch } = result;
         
         // encrypt the password
         const hashedPassword = await bcrypt.hash(password, 10);
@@ -30,13 +30,10 @@ router.post('/', async (req, res) => {
             batch
         });
         user = await user.save();
-        console.log(user);
-
-
+        res.json({"Success": "Registration Successful! You can now login to your account."})
+        //res.redirect('/api/login?success=registrationSuccess');
     }
     
-    
-
     }
     catch(e) {
         // log this to a file
