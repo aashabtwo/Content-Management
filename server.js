@@ -23,6 +23,9 @@ app.use('/api/login', isloggedIn, loginRouter);
 // profile route
 app.get('/profile', cookieCheck, authCheck, (req, res) => {
     res.send(req.user);
+});
+app.get('/', (req, res) => {
+    res.send('Welcome');
 })
 
 /*
@@ -34,6 +37,12 @@ app.delete('/logout', (req, res) => {
     }).send()
 });
 */
+// logout route
+app.delete('/logout', (req, res) => {
+    res.cookie('token', 0, { maxAge: 0*1000, httpOnly: true }).send('session deleted');
+    
+})
+
 
 // MIDDLEWARES
 

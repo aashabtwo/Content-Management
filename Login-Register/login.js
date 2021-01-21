@@ -64,7 +64,7 @@ router.post('/', async (req, res) => {
                         // now sign the token and authorize
                         const token = jwt.sign(userToken, process.env.TOKEN_SECRET, { expiresIn: '604800s' });
                         // now store the token in a cookie
-                        res.cookie('token', token, { maxAge: 30*1000, httpOnly: true })
+                        res.cookie('token', token, { maxAge: 60*1000, httpOnly: true })
                         .send('cookies set');
                         // should redirect to home
 
