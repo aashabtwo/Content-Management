@@ -19,6 +19,24 @@ router.get('/', function(req, res) {
         })
 });
 
+// display a single post and it's comments
+router.get('/:id', function(req, res) {
+    Question.findOne({ _id: req.params.id })
+        .then(result => {
+            res.json(result);
+        })
+        .catch(error => {
+            // log the error in a log file
+
+            // send the error message
+            res.json({ "Error": error });
+        })
+});
+
+
+// posting comments and their replies
+
+
 // posting questions, can only be done by users
 
 router.post('/postquery', upload.array('files', 12), async function(req, res) {
@@ -50,6 +68,7 @@ router.post('/postquery', upload.array('files', 12), async function(req, res) {
 
 
 });
+
 
 
 /*
