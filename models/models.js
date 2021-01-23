@@ -37,7 +37,7 @@ const User = mongoose.model('UserSchema', userSchema);
 // schema for posts
 const questionSchema = new mongoose.Schema({
     post: {
-        type: String,
+        type: Object,
         required: true
     },
     comment: {
@@ -46,7 +46,7 @@ const questionSchema = new mongoose.Schema({
     }
 })
 
-const Question = mongoose.model('QuestionSchema', questionSchema);
+const Question = mongoose.model('Questions', questionSchema);
 
 // article schema
 const articleSchema = new mongoose.Schema({
