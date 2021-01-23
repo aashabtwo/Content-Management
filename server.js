@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser');
 const helmet = require('helmet');
 const registerRouter = require('./Login-Register/register.js');
 const loginRouter = require('./Login-Register/login.js');
+const questionRouter = require('./Question/question.js');
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const app = express();
@@ -18,7 +19,7 @@ mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopol
 app.use(express.json())
 app.use('/api/register', isloggedIn, registerRouter);
 app.use('/api/login', isloggedIn, loginRouter);
-
+app.use('/api/question', questionRouter);
 
 // profile route
 app.get('/profile', cookieCheck, authCheck, (req, res) => {
