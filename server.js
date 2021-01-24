@@ -12,7 +12,7 @@ const app = express();
 app.use(cookieParser());
 app.use(helmet());
 
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
     .then((result) => app.listen(process.env.PORT || 3000, () => { console.log('Mongodb connected; Server is listening on Port 3000')}))
     .catch((err) => console.log(err))
 

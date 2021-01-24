@@ -1,5 +1,6 @@
 const { Question } = require('../models/models.js');
 const multer = require('multer');
+const { commentSchema } = require('../validation/validation.js')
 const express = require('express');
 const router = express.Router();
 
@@ -34,7 +35,41 @@ router.get('/:id', function(req, res) {
 });
 
 
-// posting comments and their replies
+// another attempt
+
+
+
+// posting comments
+router.put('/comment/:id', async function(req, res) {
+    try {
+        const result = await commentSchema.validateAsync(req.body);
+        try {
+            var question = await Question.findOne({ _id: req.params.id })
+            question.comment.push(result.comment);
+            try {
+                question = await question.save();
+                console.log(question);
+            } catch (err) {
+                // log the error in a log file
+
+                // send error message
+                res.json({ "Error": err });
+            }
+
+        } catch (e) {
+            // log the error in a log file
+
+            // send error message
+            res.json({ "Error" : e });
+        }
+    }
+    catch (error) {
+        // log the error in a log file
+
+        // send the error message
+        res.json({ "Error" : error });
+    }
+})
 
 
 // posting questions, can only be done by users
