@@ -82,6 +82,15 @@ router.post('/postquery', upload.array('files', 12), async function(req, res) {
      */
     var post = {};  // will add post variables here
     if (req.files) {
+        // check if the file is an image
+        for (let i = 0; i < files.length; i++) {
+            // if the image extension does not match
+            if (files[i].mimetype != 'image/png' || files[i].mimetype != 'image/jpeg') {
+                res.json({ "Error": "Only image extensions of .jpg and .png are accepted." });
+                break;
+            }
+        }
+        // add the image to the post object
         post[files] = req.files
     }
     // post the question
